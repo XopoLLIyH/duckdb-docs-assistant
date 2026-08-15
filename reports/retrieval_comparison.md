@@ -6,5 +6,7 @@
 | BM25 | ru | 0.1722 | 0.2222 | 0.1467 | 0.1566 |
 | Dense E5 | en | 0.3746 | 0.6713 | 0.4179 | 0.4301 |
 | Dense E5 | ru | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
+| Hybrid RRF | en | 0.4746 | 0.6514 | 0.4506 | 0.4740 |
+| Hybrid RRF | ru | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
 
-Dense and BM25 use the same answerable queries, qrels and cutoffs.
+All retrievers use the same answerable queries, qrels and cutoffs.

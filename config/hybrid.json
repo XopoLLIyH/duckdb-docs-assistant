@@ -1,0 +1,9 @@
+{
+  "rrf_k": 60,
+  "candidate_pool": 50,
+  "weights_by_language": {
+    "en": {"bm25": 1.0, "dense": 1.0},
+    "ru": {"bm25": 0.0, "dense": 1.0},
+    "default": {"bm25": 0.0, "dense": 1.0}
+  }
+}

@@ -149,5 +149,27 @@ python scripts/evaluate_dense.py
 `reports/dense_metrics.json`, top-10 выдача — в `reports/dense_run.jsonl`, а краткое сравнение —
 в `reports/retrieval_comparison.md`. Эмбеддинги и файлы модели намеренно не входят в Git.
 
-Следующий этап — объединить кандидатов BM25 и dense retrieval через Reciprocal Rank Fusion,
-а затем добавить reranker.
+## Hybrid retrieval: Reciprocal Rank Fusion
+
+Hybrid retriever независимо получает до 50 кандидатов из BM25 и dense E5, после чего объединяет
+их по позициям с RRF (`k=60`). Простая проверка кириллицы выбирает веса по языку запроса:
+английские запросы используют оба канала с равными весами, русские — только multilingual dense,
+поскольку документация англоязычная и BM25 не даёт полезного лексического сигнала.
+
+```powershell
+python scripts/evaluate_hybrid.py
+```
+
+| Retriever | Язык | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |
+|---|---|---:|---:|---:|---:|
+| Dense E5 | English | 0.3746 | **0.6713** | 0.4179 | 0.4301 |
+| Hybrid RRF | English | **0.4746** | 0.6514 | **0.4506** | **0.4740** |
+| Dense E5 | Russian | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
+| Hybrid RRF | Russian | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
+
+RRF улучшил раннее ранжирование английской выдачи, сохранив качество dense retrieval для русской.
+Веса выбраны на текущем development seed, поэтому до заявления о генерализации потребуется
+отдельный held-out evaluation-набор. Отчёты сохраняются в `reports/hybrid_metrics.*`, а выдача со
+вкладами отдельных каналов — в `reports/hybrid_run.jsonl`.
+
+Следующий этап — cross-encoder reranker для top-кандидатов hybrid retrieval.
