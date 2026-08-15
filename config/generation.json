@@ -1,0 +1,18 @@
+{
+  "provider": "ollama",
+  "base_url": "http://127.0.0.1:11434",
+  "model": "qwen3:8b-q4_K_M",
+  "expected_model_id": "500a1f067a9f",
+  "options": {
+    "num_ctx": 4096,
+    "temperature": 0.1,
+    "num_predict": 600,
+    "seed": 42
+  },
+  "think": false,
+  "keep_alive": "2m",
+  "context": {
+    "max_input_tokens": 3200,
+    "max_sources": 5
+  }
+}
