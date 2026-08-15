@@ -124,4 +124,30 @@ python scripts/evaluate_bm25.py
 в `reports/bm25_metrics.json`, а первые десять результатов каждого запроса — в
 `reports/bm25_run.jsonl`.
 
-Следующий этап — multilingual dense retrieval и сравнение с этим baseline по тем же qrels.
+## Multilingual dense retrieval
+
+Dense retriever использует `intfloat/multilingual-e5-base` с зафиксированной ревизией модели.
+Запросы получают префикс `query:`, документы — `passage:`; нормализованные 768-мерные
+эмбеддинги ранжируются по скалярному произведению. Матрица документов и manifest сохраняются
+локально и повторно используются только при полном совпадении модели, ревизии и порядка чанков.
+
+```powershell
+python -m pip install -e ".[dense,dev]"
+python scripts/evaluate_dense.py
+```
+
+Сравнение на тех же answerable-запросах и qrels:
+
+| Retriever | Язык | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |
+|---|---|---:|---:|---:|---:|
+| BM25 | English | 0.4167 | 0.5246 | 0.3562 | 0.3832 |
+| BM25 | Russian | 0.1722 | 0.2222 | 0.1467 | 0.1566 |
+| Dense E5 | English | 0.3746 | 0.6713 | 0.4179 | 0.4301 |
+| Dense E5 | Russian | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
+
+Подробные результаты находятся в `reports/dense_metrics.md` и
+`reports/dense_metrics.json`, top-10 выдача — в `reports/dense_run.jsonl`, а краткое сравнение —
+в `reports/retrieval_comparison.md`. Эмбеддинги и файлы модели намеренно не входят в Git.
+
+Следующий этап — объединить кандидатов BM25 и dense retrieval через Reciprocal Rank Fusion,
+а затем добавить reranker.

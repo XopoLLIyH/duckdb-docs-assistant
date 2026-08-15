@@ -1,0 +1,10 @@
+{
+  "model": "intfloat/multilingual-e5-base",
+  "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+  "query_prefix": "query: ",
+  "document_prefix": "passage: ",
+  "text_template": "title_heading_text_v1",
+  "normalize_embeddings": true,
+  "batch_size": 32,
+  "device": "auto"
+}
