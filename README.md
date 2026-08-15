@@ -172,4 +172,30 @@ RRF улучшил раннее ранжирование английской в
 отдельный held-out evaluation-набор. Отчёты сохраняются в `reports/hybrid_metrics.*`, а выдача со
 вкладами отдельных каналов — в `reports/hybrid_run.jsonl`.
 
-Следующий этап — cross-encoder reranker для top-кандидатов hybrid retrieval.
+## Multilingual cross-encoder reranker
+
+Финальный retrieval-этап использует
+[`cross-encoder/mmarco-mMiniLMv2-L12-H384-v1`](https://huggingface.co/cross-encoder/mmarco-mMiniLMv2-L12-H384-v1),
+обученный на multilingual MS MARCO. Ревизия модели зафиксирована. В отличие от bi-encoder,
+cross-encoder совместно обрабатывает вопрос и каждый документ, поэтому лучше оценивает их
+релевантность, но работает только на коротком списке кандидатов.
+
+```powershell
+python scripts/evaluate_reranker.py
+```
+
+Reranker переставляет top-10 RRF-кандидатов. Эксперимент с top-20 на development seed снизил
+MRR и Recall@10, поэтому для MVP выбран top-10; этот параметр нужно перепроверить на held-out
+наборе. Результаты эксперимента сохранены в `reports/reranker_ablation.md`.
+
+| Этап | Recall@10 | MRR@10 | nDCG@10 |
+|---|---:|---:|---:|
+| Hybrid RRF | 0.6019 | 0.4090 | 0.4285 |
+| Cross-encoder | 0.6019 | **0.5236** | **0.4679** |
+
+На CPU reranking десяти кандидатов занимает около 1.3 секунды на запрос. Полный отчёт находится
+в `reports/reranker_metrics.*`, а `reports/reranker_run.jsonl` хранит cross-encoder score и
+исходную RRF-позицию каждого результата. Файлы модели не входят в Git.
+
+Следующий этап — генерация ответа LLM по отранжированным фрагментам с обязательными ссылками на
+документацию и отказом от ответа при недостаточном контексте.

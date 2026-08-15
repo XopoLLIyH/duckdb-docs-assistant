@@ -54,7 +54,12 @@ def _render_dense_report(report: dict) -> str:
     return "\n".join(lines)
 
 
-def _render_comparison(dense: dict, bm25: dict, hybrid: dict | None = None) -> str:
+def _render_comparison(
+    dense: dict,
+    bm25: dict,
+    hybrid: dict | None = None,
+    reranker: dict | None = None,
+) -> str:
     lines = [
         "# Retrieval comparison",
         "",
@@ -64,6 +69,8 @@ def _render_comparison(dense: dict, bm25: dict, hybrid: dict | None = None) -> s
     reports = [("BM25", bm25), ("Dense E5", dense)]
     if hybrid is not None:
         reports.append(("Hybrid RRF", hybrid))
+    if reranker is not None:
+        reports.append(("Reranker", reranker))
     for retriever_name, report in reports:
         for language in ("en", "ru"):
             metrics = report["metrics"][language]
@@ -222,8 +229,14 @@ def main() -> None:
             if hybrid_path.exists()
             else None
         )
+        reranker_path = args.report_dir / "reranker_metrics.json"
+        reranker = (
+            json.loads(reranker_path.read_text(encoding="utf-8"))
+            if reranker_path.exists()
+            else None
+        )
         (args.report_dir / "retrieval_comparison.md").write_text(
-            _render_comparison(report, bm25, hybrid), encoding="utf-8"
+            _render_comparison(report, bm25, hybrid, reranker), encoding="utf-8"
         )
     print(json.dumps(report["metrics"], ensure_ascii=False, indent=2))
 

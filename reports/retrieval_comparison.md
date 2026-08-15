@@ -8,5 +8,7 @@
 | Dense E5 | ru | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
 | Hybrid RRF | en | 0.4746 | 0.6514 | 0.4506 | 0.4740 |
 | Hybrid RRF | ru | 0.4079 | 0.5524 | 0.3674 | 0.3830 |
+| Reranker | en | 0.4056 | 0.6514 | 0.5472 | 0.5080 |
+| Reranker | ru | 0.3873 | 0.5524 | 0.5000 | 0.4277 |
 
-All retrievers use the same answerable queries, qrels and cutoffs.
+All stages use the same answerable queries, qrels and cutoffs.

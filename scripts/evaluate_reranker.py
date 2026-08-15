@@ -1,20 +1,20 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import statistics
 import time
+from collections import defaultdict
 from pathlib import Path
 
-from duckdb_docs_assistant.dense import (
-    DenseIndex,
-    SentenceTransformerEncoder,
-    load_or_encode_documents,
-)
 from duckdb_docs_assistant.evaluation import load_jsonl
-from duckdb_docs_assistant.fusion import detect_query_language, reciprocal_rank_fusion
 from duckdb_docs_assistant.metrics import aggregate_metrics, ranking_metrics
-from duckdb_docs_assistant.retrieval import BM25Index
+from duckdb_docs_assistant.reranker import (
+    CrossEncoderScorer,
+    RerankCandidate,
+    rerank,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CUTOFFS = (1, 3, 5, 10)
@@ -25,21 +25,23 @@ def _percentile(values: list[float], percentile: float) -> float:
     return ordered[round((len(ordered) - 1) * percentile)] if ordered else 0.0
 
 
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for block in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def _render_report(report: dict) -> str:
-    parameters = report["parameters"]
     lines = [
-        "# Hybrid retrieval with Reciprocal Rank Fusion",
+        "# Multilingual cross-encoder reranker",
         "",
+        f"Model: `{report['model']['name']}` at revision `{report['model']['revision']}`.",
         (
-            "BM25 and multilingual E5 each retrieve an independent candidate pool. "
-            "Reciprocal Rank Fusion combines ranks rather than incomparable raw scores."
+            "The cross-encoder scores each query-passage pair jointly and reranks the top "
+            f"{report['parameters']['candidate_pool']} Hybrid RRF candidates."
         ),
-        "",
-        f"- RRF k: `{parameters['rrf_k']}`",
-        f"- Candidate pool per retriever: `{parameters['candidate_pool']}`",
-        f"- English weights: `{parameters['weights_by_language']['en']}`",
-        f"- Russian weights: `{parameters['weights_by_language']['ru']}`",
-        "- Weight selection status: development seed; held-out validation required",
         "",
         "| Language | Queries | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |",
         "|---|---:|---:|---:|---:|---:|",
@@ -57,9 +59,9 @@ def _render_report(report: dict) -> str:
             "## Runtime",
             "",
             f"- Device: `{report['runtime']['device']}`",
-            f"- Document cache reused: `{report['runtime']['document_cache_reused']}`",
-            f"- Query latency median: {report['runtime']['query_latency_ms_median']:.3f} ms",
-            f"- Query latency P95: {report['runtime']['query_latency_ms_p95']:.3f} ms",
+            f"- Model load: {report['runtime']['model_load_seconds']:.3f} s",
+            f"- Query reranking median: {report['runtime']['query_latency_ms_median']:.3f} ms",
+            f"- Query reranking P95: {report['runtime']['query_latency_ms_p95']:.3f} ms",
             "",
         ]
     )
@@ -84,7 +86,7 @@ def _render_comparison(reports: list[tuple[str, dict]]) -> str:
     lines.extend(
         [
             "",
-            "All retrievers use the same answerable queries, qrels and cutoffs.",
+            "All stages use the same answerable queries, qrels and cutoffs.",
             "",
         ]
     )
@@ -92,12 +94,9 @@ def _render_comparison(reports: list[tuple[str, dict]]) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate BM25 + dense RRF retrieval.")
+    parser = argparse.ArgumentParser(description="Evaluate cross-encoder reranking.")
     parser.add_argument(
-        "--hybrid-config", type=Path, default=PROJECT_ROOT / "config" / "hybrid.json"
-    )
-    parser.add_argument(
-        "--dense-config", type=Path, default=PROJECT_ROOT / "config" / "dense.json"
+        "--config", type=Path, default=PROJECT_ROOT / "config" / "reranker.json"
     )
     parser.add_argument(
         "--corpus",
@@ -113,9 +112,9 @@ def main() -> None:
         "--qrels", type=Path, default=PROJECT_ROOT / "data" / "eval" / "qrels.jsonl"
     )
     parser.add_argument(
-        "--embedding-cache",
+        "--hybrid-run",
         type=Path,
-        default=PROJECT_ROOT / "storage" / "embeddings",
+        default=PROJECT_ROOT / "reports" / "hybrid_run.jsonl",
     )
     parser.add_argument(
         "--model-cache", type=Path, default=PROJECT_ROOT / ".hf_cache"
@@ -123,47 +122,51 @@ def main() -> None:
     parser.add_argument("--report-dir", type=Path, default=PROJECT_ROOT / "reports")
     args = parser.parse_args()
 
-    hybrid_config = json.loads(args.hybrid_config.read_text(encoding="utf-8"))
-    dense_config = json.loads(args.dense_config.read_text(encoding="utf-8"))
+    config = json.loads(args.config.read_text(encoding="utf-8"))
     corpus = load_jsonl(args.corpus)
+    chunks_by_id = {chunk["chunk_id"]: chunk for chunk in corpus}
     questions = [row for row in load_jsonl(args.questions) if row["answerable"]]
     qrels = {
         row["query_id"]: set(row["relevant_chunk_ids"]) for row in load_jsonl(args.qrels)
     }
-    chunks_by_id = {chunk["chunk_id"]: chunk for chunk in corpus}
+    candidate_rows: dict[str, list[dict]] = defaultdict(list)
+    for row in load_jsonl(args.hybrid_run):
+        candidate_rows[row["query_id"]].append(row)
+    for rows in candidate_rows.values():
+        rows.sort(key=lambda row: row["rank"])
 
-    bm25_index = BM25Index(corpus)
-    encoder = SentenceTransformerEncoder(
-        dense_config["model"],
-        dense_config["revision"],
-        dense_config["device"],
+    model_started = time.perf_counter()
+    scorer = CrossEncoderScorer(
+        config["model"],
+        config["revision"],
+        config["device"],
         args.model_cache,
-        dense_config["normalize_embeddings"],
+        config["max_length"],
     )
-    document_embeddings, cache_manifest, cache_reused = load_or_encode_documents(
-        corpus, encoder, dense_config, args.embedding_cache
-    )
-    dense_index = DenseIndex(corpus, document_embeddings)
+    model_load_seconds = time.perf_counter() - model_started
 
-    pool_size = hybrid_config["candidate_pool"]
-    weights_by_language = hybrid_config["weights_by_language"]
     per_query = []
     run_rows = []
     query_times_ms: list[float] = []
+    pool_size = config["candidate_pool"]
     for question in questions:
+        rows = candidate_rows.get(question["query_id"], [])[:pool_size]
+        if len(rows) != pool_size:
+            raise ValueError(
+                f"Expected {pool_size} candidates for {question['query_id']}, got {len(rows)}"
+            )
+        candidates = [
+            RerankCandidate(row["chunk_id"], rank=row["rank"], score=row["score"])
+            for row in rows
+        ]
         started = time.perf_counter()
-        bm25_results = bm25_index.search(question["question"], top_k=pool_size)
-        query_embedding = encoder.encode(
-            [dense_config["query_prefix"] + question["question"]], batch_size=1
-        )
-        dense_results = dense_index.search(query_embedding, top_k=pool_size)
-        detected_language = detect_query_language(question["question"])
-        weights = weights_by_language.get(detected_language, weights_by_language["default"])
-        results = reciprocal_rank_fusion(
-            {"bm25": bm25_results, "dense": dense_results},
-            rrf_k=hybrid_config["rrf_k"],
-            weights=weights,
-            top_k=pool_size,
+        results = rerank(
+            question["question"],
+            candidates,
+            chunks_by_id,
+            scorer,
+            batch_size=config["batch_size"],
+            top_k=max(CUTOFFS),
         )
         query_times_ms.append((time.perf_counter() - started) * 1000)
         retrieved_ids = [result.chunk_id for result in results]
@@ -172,7 +175,6 @@ def main() -> None:
             {
                 "query_id": question["query_id"],
                 "language": question["language"],
-                "detected_language": detected_language,
                 "question": question["question"],
                 "relevant_count": len(qrels[question["query_id"]]),
                 "retrieved_ids": retrieved_ids,
@@ -186,7 +188,8 @@ def main() -> None:
                     "query_id": question["query_id"],
                     "rank": result.rank,
                     "score": result.score,
-                    "source_ranks": result.source_ranks,
+                    "retrieval_rank": result.retrieval_rank,
+                    "retrieval_score": result.retrieval_score,
                     "chunk_id": result.chunk_id,
                     "source_path": chunk["source_path"],
                     "section": chunk["section"],
@@ -195,24 +198,22 @@ def main() -> None:
             )
 
     report = {
-        "retriever": "bm25_dense_rrf",
-        "model": {
-            "name": dense_config["model"],
-            "revision": dense_config["revision"],
-            "dimension": encoder.dimension,
-        },
+        "retriever": "hybrid_rrf_cross_encoder",
+        "model": {"name": config["model"], "revision": config["revision"]},
         "parameters": {
-            "rrf_k": hybrid_config["rrf_k"],
             "candidate_pool": pool_size,
-            "weights_by_language": weights_by_language,
+            "batch_size": config["batch_size"],
+            "max_length": config["max_length"],
+            "text_template": config["text_template"],
             "cutoffs": list(CUTOFFS),
-            "embedding_cache_manifest": cache_manifest,
+            "candidate_run": str(args.hybrid_run.relative_to(PROJECT_ROOT)),
+            "candidate_run_sha256": _sha256(args.hybrid_run),
         },
         "corpus_chunks": len(corpus),
         "metrics": aggregate_metrics(per_query, CUTOFFS),
         "runtime": {
-            "device": encoder.device,
-            "document_cache_reused": cache_reused,
+            "device": scorer.device,
+            "model_load_seconds": round(model_load_seconds, 3),
             "query_latency_ms_mean": round(statistics.fmean(query_times_ms), 3),
             "query_latency_ms_median": round(statistics.median(query_times_ms), 3),
             "query_latency_ms_p95": round(_percentile(query_times_ms, 0.95), 3),
@@ -221,13 +222,13 @@ def main() -> None:
     }
 
     args.report_dir.mkdir(parents=True, exist_ok=True)
-    (args.report_dir / "hybrid_metrics.json").write_text(
+    (args.report_dir / "reranker_metrics.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    (args.report_dir / "hybrid_metrics.md").write_text(
+    (args.report_dir / "reranker_metrics.md").write_text(
         _render_report(report), encoding="utf-8"
     )
-    with (args.report_dir / "hybrid_run.jsonl").open(
+    with (args.report_dir / "reranker_run.jsonl").open(
         "w", encoding="utf-8", newline="\n"
     ) as output:
         for row in run_rows:
@@ -237,16 +238,12 @@ def main() -> None:
     for name, filename in (
         ("BM25", "bm25_metrics.json"),
         ("Dense E5", "dense_metrics.json"),
+        ("Hybrid RRF", "hybrid_metrics.json"),
     ):
         path = args.report_dir / filename
         if path.exists():
             comparison_inputs.append((name, json.loads(path.read_text(encoding="utf-8"))))
-    comparison_inputs.append(("Hybrid RRF", report))
-    reranker_path = args.report_dir / "reranker_metrics.json"
-    if reranker_path.exists():
-        comparison_inputs.append(
-            ("Reranker", json.loads(reranker_path.read_text(encoding="utf-8")))
-        )
+    comparison_inputs.append(("Reranker", report))
     (args.report_dir / "retrieval_comparison.md").write_text(
         _render_comparison(comparison_inputs), encoding="utf-8"
     )
