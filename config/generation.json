@@ -11,8 +11,10 @@
   },
   "think": false,
   "keep_alive": "2m",
+  "timeout_seconds": 180,
   "context": {
     "max_input_tokens": 3200,
+    "reserved_prompt_tokens": 500,
     "max_sources": 5
   }
 }
