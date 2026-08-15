@@ -1,0 +1,42 @@
+{
+  "product": "DuckDB",
+  "version_label": "current",
+  "source_repo": "https://github.com/duckdb/duckdb-web",
+  "source_commit": "f8863ffe1d9bc2f3c100d775f899305c1a9ec899",
+  "license": "MIT",
+  "include": [
+    "faq.md",
+    "docs/current/index.md",
+    "docs/current/clients/cli/*.md",
+    "docs/current/clients/python/*.md",
+    "docs/current/clients/python/**/*.md",
+    "docs/current/configuration/*.md",
+    "docs/current/connect/*.md",
+    "docs/current/data/*.md",
+    "docs/current/data/**/*.md",
+    "docs/current/guides/database_integration/*.md",
+    "docs/current/guides/file_formats/*.md",
+    "docs/current/guides/network_cloud_storage/*.md",
+    "docs/current/guides/performance/*.md",
+    "docs/current/guides/python/*.md",
+    "docs/current/guides/sql_features/*.md",
+    "docs/current/guides/troubleshooting/*.md",
+    "docs/current/operations_manual/*.md",
+    "docs/current/operations_manual/**/*.md",
+    "docs/current/sql/*.md",
+    "docs/current/sql/**/*.md",
+    "docs/current/core_extensions/httpfs/*.md",
+    "docs/current/core_extensions/postgres/*.md",
+    "docs/current/core_extensions/sqlite.md",
+    "docs/current/core_extensions/full_text_search.md"
+  ],
+  "exclude": [
+    "docs/current/clients/python/reference/**",
+    "**/meta/**"
+  ],
+  "chunking": {
+    "max_chars": 2400,
+    "overlap_chars": 240,
+    "min_chars": 80
+  }
+}

@@ -1,0 +1,7 @@
+.cache/
+data/raw/
+data/processed/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
