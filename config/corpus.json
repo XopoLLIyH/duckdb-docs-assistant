@@ -32,6 +32,7 @@
   ],
   "exclude": [
     "docs/current/clients/python/reference/**",
+    "docs/current/clients/python/relational_api.md",
     "**/meta/**"
   ],
   "chunking": {

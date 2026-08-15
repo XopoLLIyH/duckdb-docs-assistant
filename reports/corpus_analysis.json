@@ -1,0 +1,99 @@
+{
+  "chunks": 2351,
+  "documents": 265,
+  "characters": 1595378,
+  "chunk_length": {
+    "min": 80,
+    "mean": 678.6,
+    "median": 414,
+    "p90": 1848,
+    "p95": 2202,
+    "max": 2395,
+    "buckets": {
+      "0000-0255": 716,
+      "0256-0511": 645,
+      "0512-1023": 493,
+      "1024-1535": 205,
+      "1536-2047": 107,
+      "2048+": 185
+    }
+  },
+  "code_chunks": 940,
+  "code_chunk_rate": 0.3998,
+  "empty_text_chunks": 0,
+  "empty_source_urls": 0,
+  "duplicate_chunk_ids": 0,
+  "duplicate_normalized_texts": 15,
+  "chunks_by_category": {
+    "clients/cli": 77,
+    "clients/python": 91,
+    "configuration": 90,
+    "connect": 9,
+    "core_extensions": 121,
+    "data": 156,
+    "guides": 274,
+    "operations_manual": 65,
+    "other": 33,
+    "sql": 1435
+  },
+  "documents_by_category": {
+    "clients/cli": 10,
+    "clients/python": 9,
+    "configuration": 3,
+    "connect": 2,
+    "core_extensions": 11,
+    "data": 26,
+    "guides": 66,
+    "operations_manual": 13,
+    "other": 2,
+    "sql": 123
+  },
+  "largest_documents": [
+    {
+      "source_path": "docs/current/sql/functions/text.md",
+      "chunks": 111
+    },
+    {
+      "source_path": "docs/current/sql/functions/list.md",
+      "chunks": 104
+    },
+    {
+      "source_path": "docs/current/sql/functions/aggregates.md",
+      "chunks": 79
+    },
+    {
+      "source_path": "docs/current/sql/functions/numeric.md",
+      "chunks": 64
+    },
+    {
+      "source_path": "docs/current/sql/functions/utility.md",
+      "chunks": 59
+    },
+    {
+      "source_path": "docs/current/sql/functions/timestamptz.md",
+      "chunks": 50
+    },
+    {
+      "source_path": "docs/current/configuration/pragmas.md",
+      "chunks": 44
+    },
+    {
+      "source_path": "docs/current/sql/functions/timestamp.md",
+      "chunks": 42
+    },
+    {
+      "source_path": "docs/current/configuration/overview.md",
+      "chunks": 37
+    },
+    {
+      "source_path": "docs/current/sql/functions/window_functions.md",
+      "chunks": 32
+    }
+  ],
+  "source_commits": [
+    "f8863ffe1d9bc2f3c100d775f899305c1a9ec899"
+  ],
+  "versions": [
+    "current"
+  ]
+}

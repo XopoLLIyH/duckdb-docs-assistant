@@ -1,0 +1,32 @@
+{"query_id": "q001_en", "relevant_chunk_ids": ["a250751cd5248d9cac1ef2997f281e36148a1685"]}
+{"query_id": "q001_ru", "relevant_chunk_ids": ["a250751cd5248d9cac1ef2997f281e36148a1685"]}
+{"query_id": "q002_en", "relevant_chunk_ids": ["27ec869df710f7d99bc267b18d8d69c5f8e8fcab", "4663a364a9c108913c1612bd0cbc8e0a664c4e81", "7a2faf422ab19a69ccba735c7905a985a8c0f5f4", "a78071fc2b220d16bcd3dee6830bc8e767a9e041"]}
+{"query_id": "q002_ru", "relevant_chunk_ids": ["27ec869df710f7d99bc267b18d8d69c5f8e8fcab", "4663a364a9c108913c1612bd0cbc8e0a664c4e81", "7a2faf422ab19a69ccba735c7905a985a8c0f5f4", "a78071fc2b220d16bcd3dee6830bc8e767a9e041"]}
+{"query_id": "q003_en", "relevant_chunk_ids": ["16a4799f88a0cee3c8fefe01634f5c0bae59d663", "51610a4730d5a8052abf0b8032deebe10ceb74b0", "58af80e0afe277cacd6d56a64a21696df2284ec3", "7e54b450d110ffb47d1ed4db9b21594240e15723", "a5d907d001d1b027ee3cd31a6431926b99225f9d", "ac6d3054e1e7ed212054c1d04c81773df79382c2", "db2451f893d54645b07a44d496db0f387116cea1"]}
+{"query_id": "q003_ru", "relevant_chunk_ids": ["16a4799f88a0cee3c8fefe01634f5c0bae59d663", "51610a4730d5a8052abf0b8032deebe10ceb74b0", "58af80e0afe277cacd6d56a64a21696df2284ec3", "7e54b450d110ffb47d1ed4db9b21594240e15723", "a5d907d001d1b027ee3cd31a6431926b99225f9d", "ac6d3054e1e7ed212054c1d04c81773df79382c2", "db2451f893d54645b07a44d496db0f387116cea1"]}
+{"query_id": "q004_en", "relevant_chunk_ids": ["232aef06bea5fe4f41d6cd028177ce7ba82f655d", "eed7a0cf59e4def977927e8f64fcf628bd45aaab", "fb3d63fbb250b48d20f13433840bd4c3b4b4b1d5"]}
+{"query_id": "q004_ru", "relevant_chunk_ids": ["232aef06bea5fe4f41d6cd028177ce7ba82f655d", "eed7a0cf59e4def977927e8f64fcf628bd45aaab", "fb3d63fbb250b48d20f13433840bd4c3b4b4b1d5"]}
+{"query_id": "q005_en", "relevant_chunk_ids": ["5ba6c6fb693a87e088e13a9db22453acf81ff6cc", "95693519799112e803ce2152707d1dc00eea5701"]}
+{"query_id": "q005_ru", "relevant_chunk_ids": ["5ba6c6fb693a87e088e13a9db22453acf81ff6cc", "95693519799112e803ce2152707d1dc00eea5701"]}
+{"query_id": "q006_en", "relevant_chunk_ids": ["de736096dce2060482c6ca0a55f40254e2e5f691", "fce3de4acfe2a3d72c5347e162bcf4c8709351bf"]}
+{"query_id": "q006_ru", "relevant_chunk_ids": ["de736096dce2060482c6ca0a55f40254e2e5f691", "fce3de4acfe2a3d72c5347e162bcf4c8709351bf"]}
+{"query_id": "q007_en", "relevant_chunk_ids": ["4386727fb96a787db11415028ad1f0eb0c799879"]}
+{"query_id": "q007_ru", "relevant_chunk_ids": ["4386727fb96a787db11415028ad1f0eb0c799879"]}
+{"query_id": "q008_en", "relevant_chunk_ids": ["64634172256f06fada29f12e6c5129ac252838d8", "f234a7aaa60e0e2adb6490fda5e50a012c6499c1"]}
+{"query_id": "q008_ru", "relevant_chunk_ids": ["64634172256f06fada29f12e6c5129ac252838d8", "f234a7aaa60e0e2adb6490fda5e50a012c6499c1"]}
+{"query_id": "q009_en", "relevant_chunk_ids": ["ca18afd069714e3369c26747146e3746d7b02a30"]}
+{"query_id": "q009_ru", "relevant_chunk_ids": ["ca18afd069714e3369c26747146e3746d7b02a30"]}
+{"query_id": "q010_en", "relevant_chunk_ids": ["36f08719e337e42d76cd416d26eaaf15a13dfd14", "4ab3943fab5277ffad6268cb8c90b2c295e67b9f"]}
+{"query_id": "q010_ru", "relevant_chunk_ids": ["36f08719e337e42d76cd416d26eaaf15a13dfd14", "4ab3943fab5277ffad6268cb8c90b2c295e67b9f"]}
+{"query_id": "q011_en", "relevant_chunk_ids": ["5621ddfd2751986a746491f8e501f9e87b850d2d", "9e5de97ae18f0bde008c0f6162531e3d095b28a5", "ad019dc75c8df7bc1f0505fbd29c593fae505bdb"]}
+{"query_id": "q011_ru", "relevant_chunk_ids": ["5621ddfd2751986a746491f8e501f9e87b850d2d", "9e5de97ae18f0bde008c0f6162531e3d095b28a5", "ad019dc75c8df7bc1f0505fbd29c593fae505bdb"]}
+{"query_id": "q012_en", "relevant_chunk_ids": ["45afc3478e6a33dd63c39f8e067174a664972ade", "649a31dda7b46ef0728a0038de6a85a7bb9d0c8c", "666370bb6afe8416f88f9a6e8e8a0490fdfd9850", "aebd6d7367cfdc8382575290817ee2bb7130b93d", "dfebd007a9557bbf792fedb018176ce7218f890b"]}
+{"query_id": "q012_ru", "relevant_chunk_ids": ["45afc3478e6a33dd63c39f8e067174a664972ade", "649a31dda7b46ef0728a0038de6a85a7bb9d0c8c", "666370bb6afe8416f88f9a6e8e8a0490fdfd9850", "aebd6d7367cfdc8382575290817ee2bb7130b93d", "dfebd007a9557bbf792fedb018176ce7218f890b"]}
+{"query_id": "q013_en", "relevant_chunk_ids": ["168062a1f174cb07c03f96c968b8c1863e3e2ce1", "22ff9684fb98e2d8d04dd5b9f1e8823fd84d0ecb", "dc76491b6dde147d4b0e5e69a8d1d1f384f1f163"]}
+{"query_id": "q013_ru", "relevant_chunk_ids": ["168062a1f174cb07c03f96c968b8c1863e3e2ce1", "22ff9684fb98e2d8d04dd5b9f1e8823fd84d0ecb", "dc76491b6dde147d4b0e5e69a8d1d1f384f1f163"]}
+{"query_id": "q014_en", "relevant_chunk_ids": ["bc69ced6face1f7cd64026e5a0db4ec47d76f271", "bcf51763e5edf85da82dedde9f68dd1751880b89"]}
+{"query_id": "q014_ru", "relevant_chunk_ids": ["bc69ced6face1f7cd64026e5a0db4ec47d76f271", "bcf51763e5edf85da82dedde9f68dd1751880b89"]}
+{"query_id": "q015_en", "relevant_chunk_ids": ["810ff4f5ea0c2f8257f25442c2086722aca65586", "d62bbb2406fa4c0b7f8e8a9866e478427c442f04"]}
+{"query_id": "q015_ru", "relevant_chunk_ids": ["810ff4f5ea0c2f8257f25442c2086722aca65586", "d62bbb2406fa4c0b7f8e8a9866e478427c442f04"]}
+{"query_id": "q016_en", "relevant_chunk_ids": []}
+{"query_id": "q016_ru", "relevant_chunk_ids": []}

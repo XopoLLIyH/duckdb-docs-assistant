@@ -84,5 +84,22 @@ python -m pytest -q
 python -m ruff check src tests scripts
 ```
 
-Следующие этапы: исследование корпуса, ручная разметка evaluation-набора, BM25 baseline,
-dense retrieval, RRF fusion, CrossEncoder-reranker и LLM-ответы с цитированием.
+## Анализ корпуса и evaluation-набор
+
+После сборки корпуса можно воспроизвести EDA и проверить разметку:
+
+```powershell
+$env:PYTHONPATH="src"
+python scripts/analyze_corpus.py
+python scripts/validate_eval.py
+```
+
+Текущий корпус содержит 265 документов и 2 351 чанк. Evaluation seed включает 16 интентов:
+по одному эквивалентному вопросу на английском и русском языках. Для 15 интентов размечены
+релевантные секции документации; ещё одна пара проверяет отказ от неподтверждённого ответа.
+
+Результаты анализа сохраняются в `reports/corpus_analysis.md` и
+`reports/corpus_analysis.json`. Вопросы и qrels находятся в `data/eval`.
+
+Следующие этапы: BM25 baseline, multilingual dense retrieval, RRF fusion,
+CrossEncoder-reranker и LLM-ответы с цитированием.
