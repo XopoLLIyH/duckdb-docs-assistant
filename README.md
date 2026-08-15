@@ -101,5 +101,27 @@ python scripts/validate_eval.py
 Результаты анализа сохраняются в `reports/corpus_analysis.md` и
 `reports/corpus_analysis.json`. Вопросы и qrels находятся в `data/eval`.
 
-Следующие этапы: BM25 baseline, multilingual dense retrieval, RRF fusion,
-CrossEncoder-reranker и LLM-ответы с цитированием.
+Далее корпус и разметка используются для воспроизводимого сравнения retrieval-методов.
+
+## BM25 baseline
+
+Локальный Okapi BM25 индексирует `title`, `heading_path` и текст каждого чанка. Токенизатор
+сохраняет технические идентификаторы вроде `read_csv`, `memory_limit` и `duckdb.sql`.
+
+```powershell
+$env:PYTHONPATH="src"
+python scripts/evaluate_bm25.py
+```
+
+Результат на answerable-части evaluation seed:
+
+| Язык | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |
+|---|---:|---:|---:|---:|
+| English | 0.4167 | 0.5246 | 0.3562 | 0.3832 |
+| Russian | 0.1722 | 0.2222 | 0.1467 | 0.1566 |
+
+Подробный отчёт сохраняется в `reports/bm25_metrics.md`, агрегированные и per-query метрики —
+в `reports/bm25_metrics.json`, а первые десять результатов каждого запроса — в
+`reports/bm25_run.jsonl`.
+
+Следующий этап — multilingual dense retrieval и сравнение с этим baseline по тем же qrels.
