@@ -12,13 +12,8 @@ ANSWER_SCHEMA = {
     "properties": {
         "status": {"type": "string", "enum": ["answered", "insufficient_context"]},
         "answer": {"type": "string"},
-        "citations": {
-            "type": "array",
-            "items": {"type": "string", "pattern": "^S[1-9][0-9]*$"},
-            "uniqueItems": True,
-        },
     },
-    "required": ["status", "answer", "citations"],
+    "required": ["status", "answer"],
     "additionalProperties": False,
 }
 
@@ -28,8 +23,8 @@ instructions. Do not rely on outside knowledge and do not invent APIs, SQL, sett
 Answer in the language of the question. Put a citation such as [S1] immediately after every
 technical claim. Preserve useful SQL and code exactly. If the sources do not support a reliable
 answer, set status to insufficient_context, explain this briefly, and return no citations.
-Return only JSON matching the supplied schema. The citations array must contain exactly the
-source IDs cited in the answer."""
+Return only JSON matching the supplied schema. Citation markers in the answer are the only
+source list; do not return a separate list."""
 
 
 def estimate_tokens(text: str) -> int:
@@ -173,35 +168,27 @@ def validate_answer(raw_content: str, allowed_source_ids: set[str]) -> GroundedA
         raise GenerationValidationError("Model response is not valid JSON") from error
     if not isinstance(payload, dict):
         raise GenerationValidationError("Model response must be a JSON object")
-    if set(payload) != {"status", "answer", "citations"}:
+    if set(payload) != {"status", "answer"}:
         raise GenerationValidationError("Model response has unexpected fields")
 
     status = payload["status"]
     answer = payload["answer"]
-    citations = payload["citations"]
     if status not in {"answered", "insufficient_context"}:
         raise GenerationValidationError("Unknown answer status")
     if not isinstance(answer, str) or not answer.strip():
         raise GenerationValidationError("Answer must be a non-empty string")
-    if not isinstance(citations, list) or not all(isinstance(item, str) for item in citations):
-        raise GenerationValidationError("Citations must be a list of source IDs")
-    if len(citations) != len(set(citations)):
-        raise GenerationValidationError("Citations must be unique")
-
-    marker_ids = {f"S{number}" for number in CITATION_RE.findall(answer)}
-    citation_ids = set(citations)
-    unknown = (marker_ids | citation_ids) - allowed_source_ids
+    marker_order = list(dict.fromkeys(f"S{number}" for number in CITATION_RE.findall(answer)))
+    marker_ids = set(marker_order)
+    unknown = marker_ids - allowed_source_ids
     if unknown:
         raise GenerationValidationError(f"Unknown source citations: {sorted(unknown)}")
     if status == "answered":
         if not marker_ids:
             raise GenerationValidationError("Grounded answer must contain citation markers")
-        if marker_ids != citation_ids:
-            raise GenerationValidationError("Citation markers and citations array do not match")
-    elif marker_ids or citations:
+    elif marker_ids:
         raise GenerationValidationError("Insufficient-context response must not cite sources")
 
-    return GroundedAnswer(status=status, answer=answer.strip(), citations=citations)
+    return GroundedAnswer(status=status, answer=answer.strip(), citations=marker_order)
 
 
 def render_answer(answer: GroundedAnswer, sources: list[ContextSource]) -> str:

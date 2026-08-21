@@ -81,7 +81,6 @@ def test_validate_and_render_grounded_answer() -> None:
         {
             "status": "answered",
             "answer": "Use `read_parquet` [S1].",
-            "citations": ["S1"],
         }
     )
     answer = validate_answer(raw, {"S1", "S2"})
@@ -100,7 +99,6 @@ def test_validate_refusal_without_citations() -> None:
         {
             "status": "insufficient_context",
             "answer": "В источниках нет ответа.",
-            "citations": [],
         }
     )
 
@@ -109,16 +107,27 @@ def test_validate_refusal_without_citations() -> None:
     assert render_answer(answer, []) == "В источниках нет ответа."
 
 
+def test_validate_derives_unique_citations_in_answer_order() -> None:
+    raw = json.dumps(
+        {
+            "status": "answered",
+            "answer": "First claim [S2]. Second claim [S1]. Repeated [S2].",
+        }
+    )
+
+    answer = validate_answer(raw, {"S1", "S2"})
+
+    assert answer.citations == ["S2", "S1"]
+
+
 @pytest.mark.parametrize(
     "payload",
     [
-        {"status": "answered", "answer": "No citation.", "citations": []},
-        {"status": "answered", "answer": "Claim [S2].", "citations": ["S2"]},
-        {"status": "answered", "answer": "Claim [S1].", "citations": []},
+        {"status": "answered", "answer": "No citation."},
+        {"status": "answered", "answer": "Claim [S2]."},
         {
             "status": "insufficient_context",
             "answer": "No answer [S1].",
-            "citations": ["S1"],
         },
     ],
 )
