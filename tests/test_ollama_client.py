@@ -17,6 +17,9 @@ class FakeTransport:
             "prompt_eval_count": 100,
             "eval_count": 20,
             "total_duration": 123,
+            "load_duration": 12,
+            "prompt_eval_duration": 34,
+            "eval_duration": 77,
         }
 
 
@@ -45,3 +48,6 @@ def test_ollama_client_sends_non_streaming_structured_request() -> None:
     assert timeout == 180.0
     assert response.prompt_tokens == 100
     assert response.completion_tokens == 20
+    assert response.load_duration_ns == 12
+    assert response.prompt_eval_duration_ns == 34
+    assert response.eval_duration_ns == 77

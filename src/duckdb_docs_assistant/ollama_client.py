@@ -33,6 +33,9 @@ class OllamaResponse:
     prompt_tokens: int
     completion_tokens: int
     total_duration_ns: int
+    load_duration_ns: int
+    prompt_eval_duration_ns: int
+    eval_duration_ns: int
 
 
 class OllamaClient:
@@ -65,6 +68,9 @@ class OllamaClient:
                 prompt_tokens=int(response.get("prompt_eval_count", 0)),
                 completion_tokens=int(response.get("eval_count", 0)),
                 total_duration_ns=int(response.get("total_duration", 0)),
+                load_duration_ns=int(response.get("load_duration", 0)),
+                prompt_eval_duration_ns=int(response.get("prompt_eval_duration", 0)),
+                eval_duration_ns=int(response.get("eval_duration", 0)),
             )
         except (KeyError, TypeError, ValueError) as error:
             raise RuntimeError("Ollama returned an unexpected response shape") from error

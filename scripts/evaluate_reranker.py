@@ -125,7 +125,7 @@ def main() -> None:
     config = json.loads(args.config.read_text(encoding="utf-8"))
     corpus = load_jsonl(args.corpus)
     chunks_by_id = {chunk["chunk_id"]: chunk for chunk in corpus}
-    questions = [row for row in load_jsonl(args.questions) if row["answerable"]]
+    questions = load_jsonl(args.questions)
     qrels = {
         row["query_id"]: set(row["relevant_chunk_ids"]) for row in load_jsonl(args.qrels)
     }
@@ -176,6 +176,7 @@ def main() -> None:
                 "query_id": question["query_id"],
                 "language": question["language"],
                 "question": question["question"],
+                "answerable": question["answerable"],
                 "relevant_count": len(qrels[question["query_id"]]),
                 "retrieved_ids": retrieved_ids,
                 "metrics": {key: round(value, 4) for key, value in metrics.items()},
@@ -210,7 +211,11 @@ def main() -> None:
             "candidate_run_sha256": _sha256(args.hybrid_run),
         },
         "corpus_chunks": len(corpus),
-        "metrics": aggregate_metrics(per_query, CUTOFFS),
+        "candidate_queries": len(questions),
+        "answerable_metric_queries": sum(row["answerable"] for row in questions),
+        "metrics": aggregate_metrics(
+            [row for row in per_query if row["answerable"]], CUTOFFS
+        ),
         "runtime": {
             "device": scorer.device,
             "model_load_seconds": round(model_load_seconds, 3),

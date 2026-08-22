@@ -18,5 +18,5 @@ BM25 and multilingual E5 each retrieve an independent candidate pool. Reciprocal
 
 - Device: `cpu`
 - Document cache reused: `True`
-- Query latency median: 59.847 ms
-- Query latency P95: 80.297 ms
+- Query latency median: 58.400 ms
+- Query latency P95: 75.456 ms

@@ -12,6 +12,6 @@ The cross-encoder scores each query-passage pair jointly and reranks the top 10 
 ## Runtime
 
 - Device: `cpu`
-- Model load: 11.260 s
-- Query reranking median: 1285.684 ms
-- Query reranking P95: 1764.006 ms
+- Model load: 11.126 s
+- Query reranking median: 1052.837 ms
+- Query reranking P95: 1088.864 ms

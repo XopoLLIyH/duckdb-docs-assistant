@@ -45,6 +45,8 @@
     }
   },
   "corpus_chunks": 2351,
+  "candidate_queries": 32,
+  "answerable_metric_queries": 30,
   "metrics": {
     "overall": {
       "queries": 30,
@@ -98,9 +100,9 @@
   "runtime": {
     "device": "cpu",
     "document_cache_reused": true,
-    "query_latency_ms_mean": 62.504,
-    "query_latency_ms_median": 59.847,
-    "query_latency_ms_p95": 80.297
+    "query_latency_ms_mean": 102.375,
+    "query_latency_ms_median": 58.4,
+    "query_latency_ms_p95": 75.456
   },
   "per_query": [
     {
@@ -108,6 +110,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How do I install DuckDB for Python with pip?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "a250751cd5248d9cac1ef2997f281e36148a1685",
@@ -181,6 +184,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как установить DuckDB для Python через pip?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "a250751cd5248d9cac1ef2997f281e36148a1685",
@@ -254,6 +258,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "Can DuckDB query an existing Pandas DataFrame directly?",
+      "answerable": true,
       "relevant_count": 4,
       "retrieved_ids": [
         "bc35b05dec4ce7cffec05787e2edef6b2570e527",
@@ -327,6 +332,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Можно ли выполнить SQL-запрос DuckDB прямо к существующему Pandas DataFrame?",
+      "answerable": true,
       "relevant_count": 4,
       "retrieved_ids": [
         "df8e159c924b527a859032fb2c1a1b0f355a3ef0",
@@ -400,6 +406,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How does DuckDB automatically detect CSV columns and data types?",
+      "answerable": true,
       "relevant_count": 7,
       "retrieved_ids": [
         "1cfe47bf757cd83d3298adf52285ffb9fee62c4f",
@@ -473,6 +480,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как DuckDB автоматически определяет столбцы и типы данных CSV-файла?",
+      "answerable": true,
       "relevant_count": 7,
       "retrieved_ids": [
         "c6fba685acc35946a6e909cedf3f2f1ebfa7b230",
@@ -546,6 +554,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How can I read multiple Parquet files in one DuckDB query?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "bf118056c2471b1f9656ee953935cf13033a86c7",
@@ -619,6 +628,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как прочитать несколько Parquet-файлов одним запросом DuckDB?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "e127c62971ca7b96ee7bb83670f8a1b6f2a4ba29",
@@ -692,6 +702,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How do I export a query result to a Parquet file?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "e4e5557446faba84e8706d31a1be1671dde3fe27",
@@ -765,6 +776,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как сохранить результат SQL-запроса в Parquet-файл?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "dc76491b6dde147d4b0e5e69a8d1d1f384f1f163",
@@ -838,6 +850,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "Which functions can DuckDB use to load JSON data?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d40f135e85d0b061485a3b225e5b9b67dfb6dae9",
@@ -911,6 +924,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Какими функциями DuckDB можно загрузить данные из JSON?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d40f135e85d0b061485a3b225e5b9b67dfb6dae9",
@@ -984,6 +998,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How do I open a DuckDB database in read-only mode from Python?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "4386727fb96a787db11415028ad1f0eb0c799879",
@@ -1057,6 +1072,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как открыть файл базы DuckDB только для чтения из Python?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "4386727fb96a787db11415028ad1f0eb0c799879",
@@ -1130,6 +1146,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "Can multiple processes write to the same DuckDB database file at the same time?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "9e023a22f7987440f5db38e6aa406cf25a075b6e",
@@ -1203,6 +1220,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Могут ли несколько процессов одновременно записывать в один файл базы DuckDB?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "9e023a22f7987440f5db38e6aa406cf25a075b6e",
@@ -1276,6 +1294,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How can I limit the amount of memory used by DuckDB?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "795c84565cd676ab51488da7ce6bf4c0d812d05b",
@@ -1349,6 +1368,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как ограничить объём оперативной памяти, используемой DuckDB?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "2ad261347f0e1afa9d34cd1d1572839731ed52b1",
@@ -1422,6 +1442,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How do I run the DuckDB command-line interface in Docker?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "42985a83a49f06ae06b03c85025292cc33e009f4",
@@ -1495,6 +1516,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как запустить командную строку DuckDB в Docker?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "42985a83a49f06ae06b03c85025292cc33e009f4",
@@ -1568,6 +1590,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How do I connect DuckDB to an existing PostgreSQL database?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "3c66b0a791ec9a101408d4e187fe27059f92dbb1",
@@ -1641,6 +1664,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как подключить DuckDB к существующей базе PostgreSQL?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "ad105712272f1a819d40d797342aca820c2da8a3",
@@ -1714,6 +1738,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How should I configure AWS credentials for reading Parquet files from S3?",
+      "answerable": true,
       "relevant_count": 5,
       "retrieved_ids": [
         "78f0d661afee93cf9f6e34204b081466ea968cd3",
@@ -1787,6 +1812,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как настроить AWS-учётные данные для чтения Parquet-файлов из S3?",
+      "answerable": true,
       "relevant_count": 5,
       "retrieved_ids": [
         "facc12395906fc15f66ea4633e786e08793073c2",
@@ -1860,6 +1886,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How can I export an entire DuckDB database to a directory?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "95693519799112e803ce2152707d1dc00eea5701",
@@ -1933,6 +1960,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как экспортировать всю базу DuckDB в каталог?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "95693519799112e803ce2152707d1dc00eea5701",
@@ -2006,6 +2034,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How do I pass parameters safely to a DuckDB query in Python?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "bc69ced6face1f7cd64026e5a0db4ec47d76f271",
@@ -2079,6 +2108,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как безопасно передавать параметры в запрос DuckDB из Python?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "585f53bcd5d2812b2a807e1eb37c7cd33a173c43",
@@ -2152,6 +2182,7 @@
       "language": "en",
       "detected_language": "en",
       "question": "How can I import a CSV file using the DuckDB CLI dot commands?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d62bbb2406fa4c0b7f8e8a9866e478427c442f04",
@@ -2225,6 +2256,7 @@
       "language": "ru",
       "detected_language": "ru",
       "question": "Как импортировать CSV-файл с помощью dot-команд DuckDB CLI?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "307a343fcb6ccd0e426a64b7aba2b669ab2b82dc",
@@ -2291,6 +2323,154 @@
         "recall@10": 0.5,
         "mrr@10": 0.5,
         "ndcg@10": 0.3869
+      }
+    },
+    {
+      "query_id": "q016_en",
+      "language": "en",
+      "detected_language": "en",
+      "question": "How do I create database users and grant them row-level permissions in DuckDB?",
+      "answerable": false,
+      "relevant_count": 0,
+      "retrieved_ids": [
+        "223c76cd51ea9d3db58bac6cc2b77be06bf325e6",
+        "5a24520b696d0beef6aaae8e25d178bc3aac7df6",
+        "d2f219c280ad8421bf863f980e6dd72b9d0a601c",
+        "591ff67976de05dc15d13d8ae966550cb382a371",
+        "369f078d30b795ff21b1c50d8091eb197f3bf362",
+        "70dd36312b6752af62dfe3eae541903129b02dd2",
+        "3c66b0a791ec9a101408d4e187fe27059f92dbb1",
+        "68b082a68ab44c8d156c72e47d2658726e4e5b18",
+        "45afc3478e6a33dd63c39f8e067174a664972ade",
+        "666a52691252ce052df98a2c7e0034f97d126bb3",
+        "6ebf734ffac088a4ac426a43b9556ad626fffe8b",
+        "1c9116481155444fd291726e07c3028096252714",
+        "e19517df4ee25b66f267ab35890eca8fdd6aa1ca",
+        "65f251fee91586b4eeac090ba264c0278fdb75ee",
+        "66c9778f27644e8f10db5dc579bcd5558ce79168",
+        "2d369fd0e4ef7d45d1b62c7ec0d2764ffd75b832",
+        "34ce80538dd212519477f78b8e4e56b5c000bc4c",
+        "bb6f2f7cdd1a3d092f490ae99022636dd9d1c6b7",
+        "036f6898b330ab49b1d41d8d0ad5fc77fd1d6299",
+        "1818aa1a35d64d5d236226d73c67ec4b137d2c07",
+        "67b8b522e0b8c00e471b4c2c101e2bae3ed8996b",
+        "9e6ca5e889f8bfc341958e905ab32b895442470f",
+        "a381e4d48036f92c9d0676288ed78cdfeb80d32f",
+        "a02ba2088c256ac955f90f540eb7d311336bbce0",
+        "dd98cdda72c34659e7e04fbdae7acd9d6cd55cc2",
+        "e042fc6c5aeb7feb8d33e01c6fe11d73c5c67a84",
+        "fdd689d2d65016ebd1dd92a3656ac3b3809fb30e",
+        "9683cd099ea6eb7a39edb2ec3ba586b117f7c506",
+        "c24bee86a88d0b2a65c701fd2bf2509c4ecfd8d5",
+        "71524a3e635db53b0e7822fb2ce4ee3dc48d9b3a",
+        "facb32b03c008debdddedc5b7c0031ee22f5dee2",
+        "428e4aad825ce840071e56dfb0a451fdbfd66e49",
+        "51f8b497ed2943cbf5b91b903fb04bd716131279",
+        "773e89a4de135198eebdba9aed69eb7cdea4fb96",
+        "f32198d556608d9ad211ce1912d7e6b2a199eade",
+        "4033c51fcf3cc74f2a2a95a0a8e252a454c96dfb",
+        "aa2c7c71071ab2eeaecaabcdb3b6d8913f58a205",
+        "b490c88cb4ae665e07cff1656e168dbf3726f756",
+        "95dc2cb8d2e0f6b59366b228d90ee3fdfb999bb4",
+        "a0e9bbd349a75aba8e69decd0a4dc5a69474331e",
+        "9a91d3da769b82a288740e01422f9edf37f9c795",
+        "2560fd1340c5bee7c5b68cab0ac33aa803d7b068",
+        "58fc2360d2c715d1ab3f0e7a26ec029e77839880",
+        "cfbbd07bc02d32add661a951e867e4f621e029a7",
+        "27ec869df710f7d99bc267b18d8d69c5f8e8fcab",
+        "d2a0943cd9b7a9c3217e2117fb91a420763689c0",
+        "a8204d84bdf4139704b5fd01844e755277fb3cbf",
+        "cd24db4d1a8fe84ca54f3e7b11c95c5aaae3dbb8",
+        "029ba36527f2fe30886e95a0733d1d1b5e318003",
+        "3fa24597dd2c6e74b63cdab3ddf0e7ed6e165cbf"
+      ],
+      "metrics": {
+        "recall@1": 0.0,
+        "mrr@1": 0.0,
+        "ndcg@1": 0.0,
+        "recall@3": 0.0,
+        "mrr@3": 0.0,
+        "ndcg@3": 0.0,
+        "recall@5": 0.0,
+        "mrr@5": 0.0,
+        "ndcg@5": 0.0,
+        "recall@10": 0.0,
+        "mrr@10": 0.0,
+        "ndcg@10": 0.0
+      }
+    },
+    {
+      "query_id": "q016_ru",
+      "language": "ru",
+      "detected_language": "ru",
+      "question": "Как создать пользователей базы и выдать им права на отдельные строки в DuckDB?",
+      "answerable": false,
+      "relevant_count": 0,
+      "retrieved_ids": [
+        "1c9116481155444fd291726e07c3028096252714",
+        "5a24520b696d0beef6aaae8e25d178bc3aac7df6",
+        "9a91d3da769b82a288740e01422f9edf37f9c795",
+        "523dd82e4563407928694bc69756ed066615a325",
+        "2d369fd0e4ef7d45d1b62c7ec0d2764ffd75b832",
+        "67b8b522e0b8c00e471b4c2c101e2bae3ed8996b",
+        "029ba36527f2fe30886e95a0733d1d1b5e318003",
+        "8b34dac4a5301197aa4c79ff4f8e211c44fb7f54",
+        "6ebf734ffac088a4ac426a43b9556ad626fffe8b",
+        "e34352b899d7e4759f0e5ed1594c80f090c7400c",
+        "ab29016faecda100bfc11971303a1e952509d36c",
+        "585f53bcd5d2812b2a807e1eb37c7cd33a173c43",
+        "540264ae7d5b4263c6a783f137d6316ce6586b61",
+        "58fc2360d2c715d1ab3f0e7a26ec029e77839880",
+        "223c76cd51ea9d3db58bac6cc2b77be06bf325e6",
+        "3e456b10da7448ef7142da1681dfc8bd4aa6d167",
+        "d61e2d2e2dac1cb187945f32b9a6524da555a247",
+        "c24bee86a88d0b2a65c701fd2bf2509c4ecfd8d5",
+        "51f8b497ed2943cbf5b91b903fb04bd716131279",
+        "a42c5f20fac5d540fa779203f1c9c24fbcd07d7a",
+        "20b0d729904576b59a26e6051eb86d508c5c7870",
+        "a8204d84bdf4139704b5fd01844e755277fb3cbf",
+        "591ff67976de05dc15d13d8ae966550cb382a371",
+        "65f251fee91586b4eeac090ba264c0278fdb75ee",
+        "90f2b8a138a74696d69b3d6e07033766fbedfbb0",
+        "64634172256f06fada29f12e6c5129ac252838d8",
+        "d2f219c280ad8421bf863f980e6dd72b9d0a601c",
+        "9e023a22f7987440f5db38e6aa406cf25a075b6e",
+        "5c77ed69a425538ecdfb685a0343e45c1fb69e34",
+        "666a52691252ce052df98a2c7e0034f97d126bb3",
+        "fdd689d2d65016ebd1dd92a3656ac3b3809fb30e",
+        "8d4808089e3176b822926ccd2f2ee9ac7b340f4c",
+        "5d91e9849e49ce919ec313594af09597b21d99dc",
+        "307a343fcb6ccd0e426a64b7aba2b669ab2b82dc",
+        "95693519799112e803ce2152707d1dc00eea5701",
+        "baec94fa6b9852629aaea29286116ce43221a100",
+        "f7c71368a9337df9254d6d0d230025a495f43275",
+        "e626d43751453835a8726b823e9faa463449a5c7",
+        "2270bf384d91c50bfe957da1b03970e066804ec4",
+        "95dc2cb8d2e0f6b59366b228d90ee3fdfb999bb4",
+        "9cc20c365f96071eb24c19d24b9d3a745010739b",
+        "2ad261347f0e1afa9d34cd1d1572839731ed52b1",
+        "cfbbd07bc02d32add661a951e867e4f621e029a7",
+        "e12557e8dc81e5cc291fa849b57d6acbc74f9172",
+        "bc35b05dec4ce7cffec05787e2edef6b2570e527",
+        "09837ad5135370f7bfc63bb49e2ef1ac6f9fcc89",
+        "7b695ef3b4fc683b92d7a7ebfaec9a404a6745be",
+        "3c66b0a791ec9a101408d4e187fe27059f92dbb1",
+        "e22f6d1c11afe51731724be338aa313fc475ee28",
+        "d16b20a093bdd28db8a9aab466ed432a6d544480"
+      ],
+      "metrics": {
+        "recall@1": 0.0,
+        "mrr@1": 0.0,
+        "ndcg@1": 0.0,
+        "recall@3": 0.0,
+        "mrr@3": 0.0,
+        "ndcg@3": 0.0,
+        "recall@5": 0.0,
+        "mrr@5": 0.0,
+        "ndcg@5": 0.0,
+        "recall@10": 0.0,
+        "mrr@10": 0.0,
+        "ndcg@10": 0.0
       }
     }
   ]

@@ -229,6 +229,25 @@ python scripts/ask.py --preview-context "Как прочитать нескол�
 Конфигурация находится в `config/generation.json`. Клиент использует только локальный адрес
 `127.0.0.1:11434`; сгенерированный SQL автоматически не выполняется.
 
-Live smoke test Qwen сохранён в `reports/generation_smoke.md`. Следующий этап — generation
-evaluation: groundedness, полнота цитат, качество отказа, latency и скорость генерации на всём
-наборе вопросов.
+Live smoke test Qwen сохранён в `reports/generation_smoke.md`.
+
+Полная generation evaluation запускается на зафиксированном `reranker_run`, поэтому измерение
+генерации не требует повторной загрузки dense retrieval и cross-encoder моделей:
+
+```powershell
+python scripts/evaluate_generation.py
+```
+
+Прогон возобновляемый: после каждого вопроса сохраняется partial JSONL, а завершённые ответы с
+тем же fingerprint повторно не генерируются. При нарушении JSON/citation-контракта разрешена одна
+корректирующая попытка. На 32 вопросах итоговый прогон получил 100% валидных ответов и 100%
+expected-status accuracy; один запрос потребовал retry. Медианная задержка Ollama — 2.81 с,
+скорость генерации — 45.52 токена/с.
+
+Автоматические grounding-прокси заметно строже: qrel найден в контексте для 66.67% ответных
+вопросов, micro precision цитат относительно qrels — 35.56%, citation coverage абзацев — 85.71%.
+Эти числа не доказывают семантическую корректность: qrels могут быть неполными, а наличие цитаты
+не означает, что источник действительно подтверждает утверждение. Полный отчёт находится в
+`reports/generation_metrics.md`, сырые ответы и обе попытки retry — в
+`reports/generation_run.jsonl`. Следующий этап — ручная оценка correctness/completeness и
+citation entailment по заранее определённой рубрике.

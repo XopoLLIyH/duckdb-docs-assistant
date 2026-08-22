@@ -16,9 +16,11 @@
       10
     ],
     "candidate_run": "reports\\hybrid_run.jsonl",
-    "candidate_run_sha256": "ef49f392679f4b52a7b954ab9be20fd876bcefa7aa7ddcae76c8cf5aacb62f05"
+    "candidate_run_sha256": "9ede642808a7948179fea4332996fb441119d224e3b90448c513b400236590f4"
   },
   "corpus_chunks": 2351,
+  "candidate_queries": 32,
+  "answerable_metric_queries": 30,
   "metrics": {
     "overall": {
       "queries": 30,
@@ -71,16 +73,17 @@
   },
   "runtime": {
     "device": "cpu",
-    "model_load_seconds": 11.26,
-    "query_latency_ms_mean": 1278.237,
-    "query_latency_ms_median": 1285.684,
-    "query_latency_ms_p95": 1764.006
+    "model_load_seconds": 11.126,
+    "query_latency_ms_mean": 994.404,
+    "query_latency_ms_median": 1052.837,
+    "query_latency_ms_p95": 1088.864
   },
   "per_query": [
     {
       "query_id": "q001_en",
       "language": "en",
       "question": "How do I install DuckDB for Python with pip?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "a250751cd5248d9cac1ef2997f281e36148a1685",
@@ -113,6 +116,7 @@
       "query_id": "q001_ru",
       "language": "ru",
       "question": "Как установить DuckDB для Python через pip?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "a250751cd5248d9cac1ef2997f281e36148a1685",
@@ -145,6 +149,7 @@
       "query_id": "q002_en",
       "language": "en",
       "question": "Can DuckDB query an existing Pandas DataFrame directly?",
+      "answerable": true,
       "relevant_count": 4,
       "retrieved_ids": [
         "4663a364a9c108913c1612bd0cbc8e0a664c4e81",
@@ -177,6 +182,7 @@
       "query_id": "q002_ru",
       "language": "ru",
       "question": "Можно ли выполнить SQL-запрос DuckDB прямо к существующему Pandas DataFrame?",
+      "answerable": true,
       "relevant_count": 4,
       "retrieved_ids": [
         "df8e159c924b527a859032fb2c1a1b0f355a3ef0",
@@ -209,6 +215,7 @@
       "query_id": "q003_en",
       "language": "en",
       "question": "How does DuckDB automatically detect CSV columns and data types?",
+      "answerable": true,
       "relevant_count": 7,
       "retrieved_ids": [
         "c6fba685acc35946a6e909cedf3f2f1ebfa7b230",
@@ -241,6 +248,7 @@
       "query_id": "q003_ru",
       "language": "ru",
       "question": "Как DuckDB автоматически определяет столбцы и типы данных CSV-файла?",
+      "answerable": true,
       "relevant_count": 7,
       "retrieved_ids": [
         "a78071fc2b220d16bcd3dee6830bc8e767a9e041",
@@ -273,6 +281,7 @@
       "query_id": "q004_en",
       "language": "en",
       "question": "How can I read multiple Parquet files in one DuckDB query?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "729deefe7c9eebe2db17315819eab699271c9cb9",
@@ -305,6 +314,7 @@
       "query_id": "q004_ru",
       "language": "ru",
       "question": "Как прочитать несколько Parquet-файлов одним запросом DuckDB?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "e127c62971ca7b96ee7bb83670f8a1b6f2a4ba29",
@@ -337,6 +347,7 @@
       "query_id": "q005_en",
       "language": "en",
       "question": "How do I export a query result to a Parquet file?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "e4e5557446faba84e8706d31a1be1671dde3fe27",
@@ -369,6 +380,7 @@
       "query_id": "q005_ru",
       "language": "ru",
       "question": "Как сохранить результат SQL-запроса в Parquet-файл?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "5ba6c6fb693a87e088e13a9db22453acf81ff6cc",
@@ -401,6 +413,7 @@
       "query_id": "q006_en",
       "language": "en",
       "question": "Which functions can DuckDB use to load JSON data?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d40f135e85d0b061485a3b225e5b9b67dfb6dae9",
@@ -433,6 +446,7 @@
       "query_id": "q006_ru",
       "language": "ru",
       "question": "Какими функциями DuckDB можно загрузить данные из JSON?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d40f135e85d0b061485a3b225e5b9b67dfb6dae9",
@@ -465,6 +479,7 @@
       "query_id": "q007_en",
       "language": "en",
       "question": "How do I open a DuckDB database in read-only mode from Python?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "4386727fb96a787db11415028ad1f0eb0c799879",
@@ -497,6 +512,7 @@
       "query_id": "q007_ru",
       "language": "ru",
       "question": "Как открыть файл базы DuckDB только для чтения из Python?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "726d19cfcb4366f285d9e67cddce32293951ee94",
@@ -529,6 +545,7 @@
       "query_id": "q008_en",
       "language": "en",
       "question": "Can multiple processes write to the same DuckDB database file at the same time?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "64634172256f06fada29f12e6c5129ac252838d8",
@@ -561,6 +578,7 @@
       "query_id": "q008_ru",
       "language": "ru",
       "question": "Могут ли несколько процессов одновременно записывать в один файл базы DuckDB?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "7614c2420b37d416eef7594a51db865ad9950933",
@@ -593,6 +611,7 @@
       "query_id": "q009_en",
       "language": "en",
       "question": "How can I limit the amount of memory used by DuckDB?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "795c84565cd676ab51488da7ce6bf4c0d812d05b",
@@ -625,6 +644,7 @@
       "query_id": "q009_ru",
       "language": "ru",
       "question": "Как ограничить объём оперативной памяти, используемой DuckDB?",
+      "answerable": true,
       "relevant_count": 1,
       "retrieved_ids": [
         "795c84565cd676ab51488da7ce6bf4c0d812d05b",
@@ -657,6 +677,7 @@
       "query_id": "q010_en",
       "language": "en",
       "question": "How do I run the DuckDB command-line interface in Docker?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "42985a83a49f06ae06b03c85025292cc33e009f4",
@@ -689,6 +710,7 @@
       "query_id": "q010_ru",
       "language": "ru",
       "question": "Как запустить командную строку DuckDB в Docker?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "42985a83a49f06ae06b03c85025292cc33e009f4",
@@ -721,6 +743,7 @@
       "query_id": "q011_en",
       "language": "en",
       "question": "How do I connect DuckDB to an existing PostgreSQL database?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "9e5de97ae18f0bde008c0f6162531e3d095b28a5",
@@ -753,6 +776,7 @@
       "query_id": "q011_ru",
       "language": "ru",
       "question": "Как подключить DuckDB к существующей базе PostgreSQL?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "9e5de97ae18f0bde008c0f6162531e3d095b28a5",
@@ -785,6 +809,7 @@
       "query_id": "q012_en",
       "language": "en",
       "question": "How should I configure AWS credentials for reading Parquet files from S3?",
+      "answerable": true,
       "relevant_count": 5,
       "retrieved_ids": [
         "60f4ef8b8ac19aa86026595472daa12d42f99668",
@@ -817,6 +842,7 @@
       "query_id": "q012_ru",
       "language": "ru",
       "question": "Как настроить AWS-учётные данные для чтения Parquet-файлов из S3?",
+      "answerable": true,
       "relevant_count": 5,
       "retrieved_ids": [
         "78f0d661afee93cf9f6e34204b081466ea968cd3",
@@ -849,6 +875,7 @@
       "query_id": "q013_en",
       "language": "en",
       "question": "How can I export an entire DuckDB database to a directory?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "95693519799112e803ce2152707d1dc00eea5701",
@@ -881,6 +908,7 @@
       "query_id": "q013_ru",
       "language": "ru",
       "question": "Как экспортировать всю базу DuckDB в каталог?",
+      "answerable": true,
       "relevant_count": 3,
       "retrieved_ids": [
         "95693519799112e803ce2152707d1dc00eea5701",
@@ -913,6 +941,7 @@
       "query_id": "q014_en",
       "language": "en",
       "question": "How do I pass parameters safely to a DuckDB query in Python?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "bcf51763e5edf85da82dedde9f68dd1751880b89",
@@ -945,6 +974,7 @@
       "query_id": "q014_ru",
       "language": "ru",
       "question": "Как безопасно передавать параметры в запрос DuckDB из Python?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "bc69ced6face1f7cd64026e5a0db4ec47d76f271",
@@ -977,6 +1007,7 @@
       "query_id": "q015_en",
       "language": "en",
       "question": "How can I import a CSV file using the DuckDB CLI dot commands?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d62bbb2406fa4c0b7f8e8a9866e478427c442f04",
@@ -1009,6 +1040,7 @@
       "query_id": "q015_ru",
       "language": "ru",
       "question": "Как импортировать CSV-файл с помощью dot-команд DuckDB CLI?",
+      "answerable": true,
       "relevant_count": 2,
       "retrieved_ids": [
         "d62bbb2406fa4c0b7f8e8a9866e478427c442f04",
@@ -1035,6 +1067,72 @@
         "recall@10": 0.5,
         "mrr@10": 1.0,
         "ndcg@10": 0.6131
+      }
+    },
+    {
+      "query_id": "q016_en",
+      "language": "en",
+      "question": "How do I create database users and grant them row-level permissions in DuckDB?",
+      "answerable": false,
+      "relevant_count": 0,
+      "retrieved_ids": [
+        "d2f219c280ad8421bf863f980e6dd72b9d0a601c",
+        "3c66b0a791ec9a101408d4e187fe27059f92dbb1",
+        "591ff67976de05dc15d13d8ae966550cb382a371",
+        "223c76cd51ea9d3db58bac6cc2b77be06bf325e6",
+        "369f078d30b795ff21b1c50d8091eb197f3bf362",
+        "5a24520b696d0beef6aaae8e25d178bc3aac7df6",
+        "666a52691252ce052df98a2c7e0034f97d126bb3",
+        "70dd36312b6752af62dfe3eae541903129b02dd2",
+        "68b082a68ab44c8d156c72e47d2658726e4e5b18",
+        "45afc3478e6a33dd63c39f8e067174a664972ade"
+      ],
+      "metrics": {
+        "recall@1": 0.0,
+        "mrr@1": 0.0,
+        "ndcg@1": 0.0,
+        "recall@3": 0.0,
+        "mrr@3": 0.0,
+        "ndcg@3": 0.0,
+        "recall@5": 0.0,
+        "mrr@5": 0.0,
+        "ndcg@5": 0.0,
+        "recall@10": 0.0,
+        "mrr@10": 0.0,
+        "ndcg@10": 0.0
+      }
+    },
+    {
+      "query_id": "q016_ru",
+      "language": "ru",
+      "question": "Как создать пользователей базы и выдать им права на отдельные строки в DuckDB?",
+      "answerable": false,
+      "relevant_count": 0,
+      "retrieved_ids": [
+        "67b8b522e0b8c00e471b4c2c101e2bae3ed8996b",
+        "523dd82e4563407928694bc69756ed066615a325",
+        "1c9116481155444fd291726e07c3028096252714",
+        "029ba36527f2fe30886e95a0733d1d1b5e318003",
+        "5a24520b696d0beef6aaae8e25d178bc3aac7df6",
+        "e34352b899d7e4759f0e5ed1594c80f090c7400c",
+        "9a91d3da769b82a288740e01422f9edf37f9c795",
+        "6ebf734ffac088a4ac426a43b9556ad626fffe8b",
+        "8b34dac4a5301197aa4c79ff4f8e211c44fb7f54",
+        "2d369fd0e4ef7d45d1b62c7ec0d2764ffd75b832"
+      ],
+      "metrics": {
+        "recall@1": 0.0,
+        "mrr@1": 0.0,
+        "ndcg@1": 0.0,
+        "recall@3": 0.0,
+        "mrr@3": 0.0,
+        "ndcg@3": 0.0,
+        "recall@5": 0.0,
+        "mrr@5": 0.0,
+        "ndcg@5": 0.0,
+        "recall@10": 0.0,
+        "mrr@10": 0.0,
+        "ndcg@10": 0.0
       }
     }
   ]

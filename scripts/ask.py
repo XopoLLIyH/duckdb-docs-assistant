@@ -16,7 +16,9 @@ from duckdb_docs_assistant.fusion import detect_query_language, reciprocal_rank_
 from duckdb_docs_assistant.generation import (
     ANSWER_SCHEMA,
     SYSTEM_PROMPT,
+    GenerationValidationError,
     build_context,
+    build_retry_prompt,
     build_user_prompt,
     render_answer,
     validate_answer,
@@ -141,15 +143,26 @@ def main() -> None:
         return
 
     client = OllamaClient(generation_config)
-    response = client.chat(SYSTEM_PROMPT, user_prompt, ANSWER_SCHEMA)
-    answer = validate_answer(
-        response.content, {source.source_id for source in bundle.sources}
-    )
+    attempts = []
+    for attempt in range(generation_config.get("validation_retries", 0) + 1):
+        response = client.chat(SYSTEM_PROMPT, user_prompt, ANSWER_SCHEMA)
+        attempts.append(response)
+        try:
+            answer = validate_answer(
+                response.content, {source.source_id for source in bundle.sources}
+            )
+            break
+        except GenerationValidationError as error:
+            if attempt >= generation_config.get("validation_retries", 0):
+                raise
+            user_prompt = build_retry_prompt(user_prompt, str(error))
     print(render_answer(answer, bundle.sources))
     elapsed = time.perf_counter() - started
     print(
-        f"\n[model={response.model}; prompt_tokens={response.prompt_tokens}; "
-        f"completion_tokens={response.completion_tokens}; elapsed={elapsed:.2f}s]",
+        f"\n[model={response.model}; attempts={len(attempts)}; "
+        f"prompt_tokens={sum(item.prompt_tokens for item in attempts)}; "
+        f"completion_tokens={sum(item.completion_tokens for item in attempts)}; "
+        f"elapsed={elapsed:.2f}s]",
         file=sys.stderr,
     )
 

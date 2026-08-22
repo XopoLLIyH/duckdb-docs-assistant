@@ -12,6 +12,7 @@
   "think": false,
   "keep_alive": "2m",
   "timeout_seconds": 180,
+  "validation_retries": 1,
   "context": {
     "max_input_tokens": 3200,
     "reserved_prompt_tokens": 500,

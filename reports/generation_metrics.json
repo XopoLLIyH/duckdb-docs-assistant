@@ -1,0 +1,39 @@
+{
+  "model": "qwen3:8b-q4_K_M",
+  "candidate_run": "reports\\reranker_run.jsonl",
+  "candidate_run_sha256": "0d06868e0b01660cea2b3385a5457c3ef8b1a65c786757b13b5bd74a966fe087",
+  "queries": 32,
+  "metrics": {
+    "overall": {
+      "queries": 32,
+      "valid_response_rate": 1.0,
+      "expected_status_accuracy": 1.0
+    },
+    "en": {
+      "queries": 16,
+      "valid_response_rate": 1.0,
+      "expected_status_accuracy": 1.0
+    },
+    "ru": {
+      "queries": 16,
+      "valid_response_rate": 1.0,
+      "expected_status_accuracy": 1.0
+    },
+    "answerable_answer_rate": 1.0,
+    "unanswerable_refusal_accuracy": 1.0,
+    "context_qrel_coverage": 0.6667,
+    "citation_qrel_precision": 0.3556,
+    "answers_citing_qrel_rate": 0.5333,
+    "paragraph_citation_coverage": 0.8571
+  },
+  "runtime": {
+    "latency_seconds_mean": 3.106,
+    "latency_seconds_median": 2.814,
+    "latency_seconds_p95": 5.144,
+    "prompt_tokens_total": 49857,
+    "completion_tokens_total": 4108,
+    "generation_tokens_per_second": 45.517,
+    "queries_retried": 1,
+    "attempts_total": 33
+  }
+}
