@@ -1,0 +1,437 @@
+{
+  "rubric": "data/eval/generation_review_rubric.md",
+  "review": {
+    "version": "manual_single_reviewer_v1",
+    "independent": false,
+    "blinded": false
+  },
+  "inputs": {
+    "generation_run_sha256": "ea9b963855d332629f55b4f5b101d2644b6be2b937cf8bb7a61c1225141d2112",
+    "labels_sha256": "b4e60cd159f034c969be4661e95d4967cf3da3b0bdb282d899f2684df826820d"
+  },
+  "metrics": {
+    "overall": {
+      "queries": 32,
+      "normalized_score": 0.9609,
+      "strict_pass_rate": 0.7188,
+      "dimension_full_score_rates": {
+        "correctness": 0.9688,
+        "completeness": 0.8438,
+        "citation_entailment": 0.9375,
+        "language_quality": 0.9375
+      },
+      "dimension_scores": {
+        "correctness": 63,
+        "completeness": 59,
+        "citation_entailment": 62,
+        "language_quality": 62
+      },
+      "score": 246,
+      "max_score": 256
+    },
+    "en": {
+      "queries": 16,
+      "normalized_score": 0.9688,
+      "strict_pass_rate": 0.75,
+      "dimension_full_score_rates": {
+        "correctness": 1.0,
+        "completeness": 0.8125,
+        "citation_entailment": 0.9375,
+        "language_quality": 1.0
+      },
+      "dimension_scores": {
+        "correctness": 32,
+        "completeness": 29,
+        "citation_entailment": 31,
+        "language_quality": 32
+      },
+      "score": 124,
+      "max_score": 128
+    },
+    "ru": {
+      "queries": 16,
+      "normalized_score": 0.9531,
+      "strict_pass_rate": 0.6875,
+      "dimension_full_score_rates": {
+        "correctness": 0.9375,
+        "completeness": 0.875,
+        "citation_entailment": 0.9375,
+        "language_quality": 0.875
+      },
+      "dimension_scores": {
+        "correctness": 31,
+        "completeness": 30,
+        "citation_entailment": 31,
+        "language_quality": 30
+      },
+      "score": 122,
+      "max_score": 128
+    }
+  },
+  "qrel_audit": {
+    "qrel_misses": 10,
+    "full_correct_despite_qrel_miss": 9,
+    "query_ids": [
+      "q003_en",
+      "q004_en",
+      "q006_en",
+      "q009_en",
+      "q009_ru",
+      "q010_ru",
+      "q012_en",
+      "q012_ru",
+      "q013_en",
+      "q013_ru"
+    ]
+  },
+  "error_counts": {
+    "citation_gap": 2,
+    "incomplete": 5,
+    "irrelevant_detail": 1,
+    "mixed_language": 1,
+    "presentation": 1,
+    "retrieval_mismatch": 1
+  },
+  "per_query": [
+    {
+      "query_id": "q001_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Direct pip commands and optional variants are supported.",
+      "language": "en"
+    },
+    {
+      "query_id": "q001_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct localized installation answer.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q002_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Replacement scans and the DataFrame example are directly supported.",
+      "language": "en"
+    },
+    {
+      "query_id": "q002_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 1,
+      "error_types": [
+        "presentation"
+      ],
+      "note": "Correct answer, but it reproduces an internal relative documentation link and adds an irrelevant append detail.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q003_en",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [
+        "incomplete"
+      ],
+      "note": "Explains dialect and type inference but omits how detection can be configured.",
+      "language": "en"
+    },
+    {
+      "query_id": "q003_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Covers automatic sniffing and manual type/date overrides.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q004_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct list-of-globs example and same-schema constraint.",
+      "language": "en"
+    },
+    {
+      "query_id": "q004_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct glob/list solution.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q005_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct COPY FORMAT parquet example.",
+      "language": "en"
+    },
+    {
+      "query_id": "q005_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct COPY FORMAT parquet example.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q006_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Reader functions are correctly listed and directly supported.",
+      "language": "en"
+    },
+    {
+      "query_id": "q006_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Reader functions are correctly listed and directly supported.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q007_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct read_only=True usage.",
+      "language": "en"
+    },
+    {
+      "query_id": "q007_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct read_only=True usage.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q008_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 1,
+      "language_quality": 2,
+      "error_types": [
+        "citation_gap"
+      ],
+      "note": "The conclusion is correct, but the sole citation supports read-only sharing and not the Quack or DuckLake alternatives mentioned.",
+      "language": "en"
+    },
+    {
+      "query_id": "q008_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Single-process and multi-process behavior are correctly explained and cited.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q009_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "memory_limit is correctly shown; secondary recommendations are supported.",
+      "language": "en"
+    },
+    {
+      "query_id": "q009_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "memory_limit and the optional thread reduction are supported.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q010_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct official container command for the CLI.",
+      "language": "en"
+    },
+    {
+      "query_id": "q010_ru",
+      "correctness": 1,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [
+        "retrieval_mismatch",
+        "irrelevant_detail"
+      ],
+      "note": "The container opens the CLI, but retrieval selected the UI subsection; the answer unnecessarily enables host networking and tells the user to start the UI.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q011_en",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [
+        "incomplete"
+      ],
+      "note": "ATTACH and the connection string are correct, but the expected extension setup is omitted.",
+      "language": "en"
+    },
+    {
+      "query_id": "q011_ru",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [
+        "incomplete"
+      ],
+      "note": "ATTACH and the connection string are correct, but the expected extension setup is omitted.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q012_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Manual S3 secret and credential_chain are both covered.",
+      "language": "en"
+    },
+    {
+      "query_id": "q012_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 1,
+      "error_types": [
+        "mixed_language"
+      ],
+      "note": "Technically complete, but one Russian phrase contains Chinese characters.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q013_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct EXPORT DATABASE statement.",
+      "language": "en"
+    },
+    {
+      "query_id": "q013_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct EXPORT DATABASE statement.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q014_en",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [
+        "incomplete"
+      ],
+      "note": "Positional parameters are explained, but named parameters are omitted.",
+      "language": "en"
+    },
+    {
+      "query_id": "q014_ru",
+      "correctness": 2,
+      "completeness": 1,
+      "citation_entailment": 1,
+      "language_quality": 2,
+      "error_types": [
+        "incomplete",
+        "citation_gap"
+      ],
+      "note": "Named parameters are shown, but positional parameters are omitted and the injection/sanitization claims are not supported by the cited chunk.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q015_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct CLI .import syntax and options.",
+      "language": "en"
+    },
+    {
+      "query_id": "q015_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correct CLI .import syntax and options.",
+      "language": "ru"
+    },
+    {
+      "query_id": "q016_en",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correctly refuses without citations.",
+      "language": "en"
+    },
+    {
+      "query_id": "q016_ru",
+      "correctness": 2,
+      "completeness": 2,
+      "citation_entailment": 2,
+      "language_quality": 2,
+      "error_types": [],
+      "note": "Correctly refuses without citations.",
+      "language": "ru"
+    }
+  ]
+}
